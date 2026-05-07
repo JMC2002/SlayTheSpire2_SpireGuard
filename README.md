@@ -4,7 +4,7 @@
 
 [📦 Releases](https://github.com/JMC2002/SlayTheSpire2_SpireGuard/releases)
 
-# 占位标题
+# SpireGuard
 ##  0. 安装
 
 ### Mod本体安装
@@ -36,20 +36,27 @@ Steam版本直接在创意工坊订阅即可（暂未开放）
 
 ---
 ## 🧠 1. 简介
-占位简介
+SpireGuard 用于限制《杀戮尖塔 2》联机局中的控制台权限。默认情况下，客机无法主动打开或提交控制台命令，主机仍可正常使用控制台，并保持原版的主机命令同步行为。
 
-[演示视频（B站）](https://www.bilibili.com/video/BV1BnwXziEsc)
+[演示视频（B站）](待定)
 
-[Github仓库](https://github.com/JMC2002/SlayTheSpire2_TeamHandView)
+[Github仓库](https://github.com/JMC2002/SlayTheSpire2_SpireGuard)
 ## ⚙️ 2. 功能
-- 如上所述
+- 联机时禁止客机主动打开控制台。
+- 联机时禁止客机主动提交控制台命令。
+- 主机端拒收客机绕过本地限制发送的控制台网络动作。
+- 提供 JmcModLib 设置项，可以随时启用或停用保护逻辑。
+- 发布 manifest 标记为非玩法影响，便于作为本地联机保护工具使用。
  
 ## 🔔 3. 提醒
-- **本模组强依赖于模组[JmcModLib](https://github.com/JMC2002/SlayTheSpire2_TeamHandView/releases)**
+- **本模组强依赖于模组[JmcModLib](https://github.com/JMC2002/SlayTheSpire2_JmcModLib/releases)**
+- 主机需要安装并启用本模组，才能权威阻止客机发来的控制台网络动作。
+- 如果只有客机安装，本模组只能阻止该客机本地使用控制台，无法替未安装的主机拦截其他玩家。
  
 ## 🧩 4. 兼容性
 - 由于游戏处于EA阶段，可能会随着游戏版本更新而失效
 
 ## 🧭 5. TODO
+- 根据后续游戏版本变化继续跟进控制台和联机同步入口。
 
 **如果你喜欢这个 Mod 的话，希望可以点一个star~**

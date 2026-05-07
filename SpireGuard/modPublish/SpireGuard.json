@@ -2,8 +2,8 @@
   "id": "SpireGuard",
   "name": "SpireGuard",
   "author": "JMC",
-  "version": "1.0.2",
-  "description": "将攻击牌和诅咒变为爪击，后续可能考虑做成通用形式；有问题反馈B站JMC丶或者Github，二次分发请注明来源",
+  "version": "1.0.4",
+  "description": "联机时禁止客机主动使用控制台功能，主机仍可使用控制台；有问题反馈B站JMC丶或者Github，二次分发请注明来源",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [
