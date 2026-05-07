@@ -1,5 +1,7 @@
 {
   "EXTENSION.JMCMODLIB.CONFIG.SpireGuard.GROUP.general": "基础设置",
   "EXTENSION.JMCMODLIB.CONFIG.SpireGuard.enabled.NAME": "启用 SpireGuard",
-  "EXTENSION.JMCMODLIB.CONFIG.SpireGuard.enabled.DESCRIPTION": "开启后在联机时禁止客机主动打开或提交控制台；关闭后补丁会直接放行原版逻辑。"
+  "EXTENSION.JMCMODLIB.CONFIG.SpireGuard.enabled.DESCRIPTION": "开启后在联机时禁止客机主动打开或提交控制台；关闭后补丁会直接放行原版逻辑。",
+  "EXTENSION.JMCMODLIB.CONFIG.SpireGuard.show_host_block_popup.NAME": "主机拦截时弹出提示",
+  "EXTENSION.JMCMODLIB.CONFIG.SpireGuard.show_host_block_popup.DESCRIPTION": "开启后主机拦截客机控制台网络动作时，会弹出单按钮提示框显示玩家名称。"
 }

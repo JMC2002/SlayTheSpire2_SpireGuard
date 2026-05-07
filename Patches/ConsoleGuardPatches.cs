@@ -126,6 +126,7 @@ internal static class ActionQueueSynchronizerHandleRequestEnqueueActionMessagePa
         }
 
         ModLogger.Warn($"SpireGuard 已阻止客机 {senderId} 发来的控制台网络动作：{consoleAction.cmd}");
+        HostBlockPopupService.NotifyBlockedConsoleAction(senderId, consoleAction.cmd);
         return false;
     }
 }

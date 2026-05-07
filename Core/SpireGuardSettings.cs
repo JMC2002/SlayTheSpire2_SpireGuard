@@ -18,8 +18,23 @@ public static class SpireGuardSettings
         Order = 10)]
     public static bool Enabled = true;
 
+    [UIToggle]
+    [Config(
+        "主机拦截时弹出提示",
+        onChanged: nameof(OnHostBlockPopupChanged),
+        group: GeneralGroup,
+        Description = "开启后主机拦截客机控制台网络动作时，会弹出单按钮提示框显示玩家名称。",
+        Key = "show_host_block_popup",
+        Order = 20)]
+    public static bool ShowHostBlockPopup = true;
+
     private static void OnEnabledChanged(bool enabled)
     {
         ModLogger.Info($"SpireGuard 已{(enabled ? "启用" : "停用")}。");
+    }
+
+    private static void OnHostBlockPopupChanged(bool enabled)
+    {
+        ModLogger.Info($"SpireGuard 主机拦截弹窗已{(enabled ? "启用" : "停用")}。");
     }
 }
