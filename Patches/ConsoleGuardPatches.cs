@@ -4,62 +4,12 @@ using JmcModLib.Utils;
 using MegaCrit.Sts2.Core.DevConsole;
 using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Multiplayer.Game;
-using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
 using MegaCrit.Sts2.Core.Multiplayer.Messages.Game;
 using MegaCrit.Sts2.Core.Nodes.Debug;
-using MegaCrit.Sts2.Core.Runs;
-using MegaCrit.Sts2.Core.Saves;
 using SpireGuard.Core;
 using CoreDevConsole = MegaCrit.Sts2.Core.DevConsole.DevConsole;
 
 namespace SpireGuard.Patches;
-
-[HarmonyPatch(typeof(StartRunLobby), MethodType.Constructor, new Type[] { typeof(GameMode), typeof(INetGameService), typeof(IStartRunLobbyListener), typeof(int) })]
-internal static class StartRunLobbyConstructorPatch
-{
-    [HarmonyPostfix]
-    private static void Postfix(StartRunLobby __instance)
-    {
-        MultiplayerRoleState.TrackLobbyService(__instance.NetService, "新开局大厅");
-    }
-}
-
-[HarmonyPatch(typeof(StartRunLobby), nameof(StartRunLobby.CleanUp))]
-internal static class StartRunLobbyCleanUpPatch
-{
-    [HarmonyPostfix]
-    private static void Postfix(StartRunLobby __instance, bool disconnectSession)
-    {
-        if (disconnectSession || !__instance.NetService.IsConnected)
-        {
-            MultiplayerRoleState.ClearLobbyService(__instance.NetService, "新开局大厅");
-        }
-    }
-}
-
-[HarmonyPatch(typeof(LoadRunLobby), MethodType.Constructor, new Type[] { typeof(INetGameService), typeof(ILoadRunLobbyListener), typeof(SerializableRun) })]
-internal static class LoadRunLobbyConstructorPatch
-{
-    [HarmonyPostfix]
-    private static void Postfix(LoadRunLobby __instance)
-    {
-        MultiplayerRoleState.TrackLobbyService(__instance.NetService, "读档大厅");
-    }
-}
-
-[HarmonyPatch(typeof(LoadRunLobby), nameof(LoadRunLobby.CleanUp))]
-internal static class LoadRunLobbyCleanUpPatch
-{
-    [HarmonyPostfix]
-    private static void Postfix(LoadRunLobby __instance, bool disconnectSession)
-    {
-        if (disconnectSession || !__instance.NetService.IsConnected)
-        {
-            MultiplayerRoleState.ClearLobbyService(__instance.NetService, "读档大厅");
-        }
-    }
-}
 
 [HarmonyPatch(typeof(NDevConsole), nameof(NDevConsole.ShowConsole))]
 internal static class NDevConsoleShowConsolePatch
@@ -128,5 +78,20 @@ internal static class ActionQueueSynchronizerHandleRequestEnqueueActionMessagePa
         ModLogger.Warn($"SpireGuard 已阻止客机 {senderId} 发来的控制台网络动作：{consoleAction.cmd}");
         HostBlockPopupService.NotifyBlockedConsoleAction(senderId, consoleAction.cmd);
         return false;
+    }
+}
+
+[HarmonyPatch(typeof(ActionQueueSynchronizer), "HandleActionEnqueuedMessage", new Type[] { typeof(ActionEnqueuedMessage), typeof(ulong) })]
+internal static class ActionQueueSynchronizerHandleActionEnqueuedMessagePatch
+{
+    [HarmonyPrefix]
+    private static bool Prefix(ActionEnqueuedMessage message)
+    {
+        if (message.action is NetConsoleCmdGameAction consoleAction)
+        {
+            HostBlockPopupService.NotifyRemoteConsoleAction(message.playerId, consoleAction.cmd);
+        }
+
+        return true;
     }
 }

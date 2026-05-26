@@ -8,35 +8,16 @@ public static class MultiplayerRoleState
 {
     public const string GuestBlockedMessage = "联机客机不能使用控制台。";
 
-    private static INetGameService? lobbyNetService;
-
     public static bool ShouldBlockLocalClientConsole()
     {
-        return SpireGuardSettings.Enabled && GetCurrentRole().IsConnectedClient;
+        return SpireGuardSettings.Enabled &&
+            SpireGuardSettings.BlockLocalClientConsole &&
+            GetCurrentRole().IsConnectedClient;
     }
 
     public static bool ShouldBlockRemoteConsoleActionOnHost()
     {
         return SpireGuardSettings.Enabled && GetCurrentRole().IsConnectedHost;
-    }
-
-    public static void TrackLobbyService(INetGameService? netService, string source)
-    {
-        lobbyNetService = netService;
-
-        if (netService?.Type.IsMultiplayer() == true)
-        {
-            ModLogger.Debug($"SpireGuard 已记录{source}网络状态：{netService.Type}。");
-        }
-    }
-
-    public static void ClearLobbyService(INetGameService? netService, string source)
-    {
-        if (netService == null || ReferenceEquals(lobbyNetService, netService))
-        {
-            lobbyNetService = null;
-            ModLogger.Debug($"SpireGuard 已清理{source}网络状态缓存。");
-        }
     }
 
     private static MultiplayerRole GetCurrentRole()
@@ -74,7 +55,7 @@ public static class MultiplayerRoleState
             return runManager.NetService;
         }
 
-        return lobbyNetService;
+        return null;
     }
 
     private readonly record struct MultiplayerRole(

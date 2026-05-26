@@ -8,7 +8,8 @@ namespace SpireGuard.Core;
 
 public static class HostBlockPopupService
 {
-    private const string PopupTitle = "SpireGuard 拦截提示";
+    private const string BlockPopupTitle = "SpireGuard 拦截提示";
+    private const string DetectPopupTitle = "SpireGuard 控制台提醒";
     private const string PopupOkText = "知道了";
     private const int MaxCommandPreviewLength = 160;
 
@@ -33,21 +34,48 @@ public static class HostBlockPopupService
         string body = $"已拦截玩家 [gold]{safePlayerName}[/gold] 发来的控制台网络动作。\n命令：[red]{safeCommand}[/red]";
 
         popupActive = true;
-        _ = ShowPopupAsync(body);
+        _ = ShowPopupAsync(BlockPopupTitle, body);
     }
 
-    private static async Task ShowPopupAsync(string body)
+    public static void NotifyRemoteConsoleAction(ulong playerId, string command)
+    {
+        if (!SpireGuardSettings.Enabled ||
+            !SpireGuardSettings.ShowRemoteConsolePopup ||
+            IsLocalPlayer(playerId))
+        {
+            return;
+        }
+
+        string playerName = ResolvePlayerName(playerId);
+        string commandPreview = TrimCommand(command);
+        ModLogger.Warn($"SpireGuard 检测到其他玩家 {playerName} 使用控制台命令：{commandPreview}");
+
+        if (popupActive)
+        {
+            ModLogger.Debug("SpireGuard 已有控制台提示弹窗显示中，本次不重复弹窗。");
+            return;
+        }
+
+        string safePlayerName = EscapeRichText(playerName);
+        string safeCommand = EscapeRichText(commandPreview);
+        string body = $"检测到玩家 [gold]{safePlayerName}[/gold] 使用了控制台命令。\n命令：[red]{safeCommand}[/red]";
+
+        popupActive = true;
+        _ = ShowPopupAsync(DetectPopupTitle, body);
+    }
+
+    private static async Task ShowPopupAsync(string title, string body)
     {
         try
         {
             if (!JmcConfirmationPopup.IsAvailable)
             {
-                ModLogger.Debug("SpireGuard 拦截提示弹窗暂不可用，本次只记录日志。");
+                ModLogger.Debug("SpireGuard 控制台提示弹窗暂不可用，本次只记录日志。");
                 return;
             }
 
             await JmcConfirmationPopup.ShowMessageAsync(
-                PopupTitle,
+                title,
                 body,
                 PopupOkText,
                 showBackstop: true,
@@ -60,6 +88,19 @@ public static class HostBlockPopupService
         finally
         {
             popupActive = false;
+        }
+    }
+
+    private static bool IsLocalPlayer(ulong playerId)
+    {
+        try
+        {
+            return RunManager.Instance.NetService.NetId == playerId;
+        }
+        catch (Exception ex)
+        {
+            ModLogger.Warn("读取本机 NetId 失败，本次其他玩家控制台检测将按远端玩家处理。", ex);
+            return false;
         }
     }
 
