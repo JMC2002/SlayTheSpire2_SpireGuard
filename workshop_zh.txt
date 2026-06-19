@@ -1,16 +1,18 @@
-﻿[h1] SpireGuard（联机时禁止控制台    ） [/h1]
+[h1] SpireGuard（联机时禁止控制台） [/h1]
 [h2] 1. 简介 [/h2]
 联机时总是有队友偷偷开控制台？用这个MOD来解决吧！（本机安装即可）
 
-[url=https://github.com/JMC2002/SlayTheSpire2_TeamHandView] Github仓库 [/url]
-[url=https://www.bilibili.com/video/BV1BnwXziEsc] 演示视频（b站） [/url]
+[url=https://github.com/JMC2002/SlayTheSpire2_SpireGuard] Github仓库 [/url]
+[url=https://www.bilibili.com/video/BV1CXdPBZE8D] 演示视频（b站） [/url]
 
 [h2] 2. 功能 [/h2]
 [list]
-    [*] 联机时悬停其他玩家状态栏可查看其当前手牌，你也可以使用可配置的快捷键（手柄在Steam输入里设置）锁定显示
-    [img]https://images.steamusercontent.com/ugc/12663845091139171176/D8E176940CBB9C3A0F377F33C8C86BD9B1C2625F/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false[/img]
-    [*] 支持在模组设置中调整卡牌缩放、每行最大卡牌数和锁定/解锁热键
-    [img]https://images.steamusercontent.com/ugc/17108105702485605775/F373F29E2C12C3BC918B901E3A3EC6956FDA4C12/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false[/img]
+    [*] 主机打开功能后，当客机使用控制台命令或者基于控制台命令的MOD时，主机会进行拦截，并给主机弹窗提醒，哪位玩家使用了什么命令。
+    [img]https://images.steamusercontent.com/ugc/11871054468909674251/D1E338B443217A4BF9774CAF510914A8ABEACF00/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false[/img]
+    [*] 作为客机对拦截无能为力，但是可以监测谁发出了什么命令
+    [img]https://images.steamusercontent.com/ugc/16399244011958331106/B571D821779F4AA871919ABFD959F17086FE885A/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false[/img]
+    [*] 可以设置功能的开启与关闭
+    [img]https://images.steamusercontent.com/ugc/12196734696829028346/5BF894441CB1F71309D8AC3ADEFF4030C5F2FA38/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false[/img]
 [/list]
 
 [h2] 3. 提醒 [/h2]
@@ -30,7 +32,7 @@
 - 
 
 [h2] 6. 其他 [/h2]
-有意见和建议欢迎大家在讨论区留言或者github提issue，更新日志可以点击右上角“[url=https://steamcommunity.com/sharedfiles/filedetails/changelog/3747539659] 改动说明 [/url]”查看。
+有意见和建议欢迎大家在讨论区留言或者github提issue，更新日志可以点击右上角“[url=https://steamcommunity.com/sharedfiles/filedetails/changelog/3747539605] 改动说明 [/url]”查看。
 
 [b] 如果你喜欢这个 Mod 的话，希望可以点一下好评~[/b]
 
