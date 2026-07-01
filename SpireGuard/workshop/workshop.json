@@ -1,0 +1,12 @@
+{
+  "title": "SpireGuard",
+  "description": "联机时主机可拦截客机控制台网络动作，并可提示其他玩家使用控制台；有问题反馈B站JMC丶或者Github，二次分发请注明来源",
+  "visibility": "public",
+  "changeNote": "适配正式MOD发布的格式迁移。",
+  "tags": [
+    "QoL"
+  ],
+  "dependencies": [
+    3747526103
+  ]
+}
